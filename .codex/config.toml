@@ -1,0 +1,5 @@
+# Codex Project Configuration
+# MCP servers are configured globally in ~/.codex/config.toml
+
+[features]
+skills = true

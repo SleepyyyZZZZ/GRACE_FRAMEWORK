@@ -1,0 +1,20 @@
+# $PROJECT_NAME — Dependencies
+# Each library has an architectural comment explaining WHY it was chosen.
+#
+# CRITICAL: Do not add libraries without commenting the reason.
+# Priority: reliable stdlib-adjacent libraries first.
+#
+# DOCKER: This file is read by Dockerfile (pip install -r requirements.txt)
+# and by the agent to understand which libraries are available and why.
+# Run `python test_lib.py` inside the container to verify versions.
+
+# --- Core ---
+# (add project dependencies here)
+# pandas==2.3.3          # Complex joins and vectorized transforms (Criterion: Transformation speed)
+# gradio==4.12.0         # Rapid UI prototyping (Criterion: Simplicity for AI)
+# plotly==6.5.2          # Interactive charts (Criterion: Plotly Express API)
+# fastapi==0.115.0       # Async REST API framework (Criterion: Performance + auto docs)
+# sqlalchemy==2.0.35     # ORM with async support (Criterion: Type-safe DB access)
+
+# --- Testing ---
+pytest==9.0.2            # Test framework with caplog support for LDD telemetry

@@ -1,0 +1,55 @@
+<!--
+  GLOBAL AppGraph.xml — Knowledge Graph of the entire project codebase.
+
+  NAVIGATION HIERARCHY:
+    1. Agent starts here → finds module by keywords/tag
+    2. Follows CrossLinks to understand dependencies
+    3. Opens module file → reads MODULE_MAP
+    4. Jumps to START_FUNCTION_X → reads CONTRACT
+    5. Reads specific START_BLOCK_Y
+
+  LOCAL GRAPHS:
+    For large features or isolated modules, create a local AppGraph.xml
+    inside the module directory (e.g., src/auth/AppGraph.xml).
+    Local graphs follow the same format but cover only that module.
+    The global graph MUST reference every local graph via MODULE_LOCAL entry (TYPE="LOCAL_GRAPH_REF").
+    An orphaned local graph (not referenced from global) is a GRAPH_VIOLATION.
+
+  RULES:
+    - Generated/updated AFTER all tests pass (final step of mode-code).
+    - Use graph-protocol skill for proper XML structure.
+    - Tag naming: _py (module), _CLASS (class), _FUNC (function), _METHOD (method).
+    - All tags must have TYPE attribute.
+    - Replace dots with underscores in tag names.
+-->
+<KnowledgeGraph>
+  <Project_1_0_0_Info TYPE="PROJECT_INFO">
+    <keywords>$KEYWORDS</keywords>
+    <annotation>$ANNOTATION</annotation>
+    <BusinessScenarios>
+      <!-- <Scenario NAME="ScenarioName">Actor -> Action -> Result</Scenario> -->
+    </BusinessScenarios>
+  </Project_1_0_0_Info>
+
+  <!-- Modules go here. Example:
+  <src_auth_service_py FILE="src/auth/service.py" TYPE="CORE_LOGIC">
+    <auth_AuthService_CLASS NAME="AuthService" TYPE="IS_CLASS_OF_MODULE">
+      <auth_AuthService_login_METHOD NAME="login" TYPE="BUSINESS_LOGIC">
+        <annotation>Authenticate user by email and password.</annotation>
+        <CrossLinks>
+          <Link TARGET="src_auth_repository_py_find_user_by_email_METHOD" TYPE="CALLS_METHOD" />
+        </CrossLinks>
+      </auth_AuthService_login_METHOD>
+    </auth_AuthService_CLASS>
+  </src_auth_service_py>
+
+  Local graph reference (agent reads local graph for deeper detail):
+  <src_payments_LOCAL FILE="src/payments/AppGraph.xml" TYPE="LOCAL_GRAPH_REF">
+    <annotation>Payment module has its own local graph with detailed internals.</annotation>
+  </src_payments_LOCAL>
+  -->
+
+  <ProjectCrossLinks TYPE="MODULE_INTERACTIONS_OVERVIEW">
+    <!-- <Link SOURCE="src_auth_service_py" TARGET="src_auth_repository_py" TYPE="DEPENDS_ON" /> -->
+  </ProjectCrossLinks>
+</KnowledgeGraph>

@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: ${PROJECT_NAME:-grace-app}
+    volumes:
+      - .:/app
+    environment:
+      - DOCKER_CONTAINER=true
+    # Override CMD for development:
+    # docker compose run app python -m pytest tests/ -s -v
+    # docker compose run app python test_lib.py
+    # docker compose run app python src/main.py
